@@ -15,7 +15,7 @@ fn report_is_safe(report: &[i32]) -> bool {
         .map(|nums| match nums {
             &[num1, num2] => {
                 let diff = (num2 - num1).abs();
-                diff >= 1 && diff <= 3
+                (1..=3).contains(&diff)
             }
             _ => panic!("Invalid input"),
         })
@@ -30,7 +30,7 @@ fn report_is_1_away_from_safe(report: &[i32]) -> bool {
 
     // Try 1 element modifications
     for ignore_idx in 0..report.len() {
-        let modified_report = &report
+        let modified_report = report
             .iter()
             .enumerate()
             .filter_map(|(i, elem)| match i != ignore_idx {
